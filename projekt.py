@@ -4,7 +4,6 @@ import time
 from Kierunek import Kierunek
 from Waz import Waz
 from Jablko import Jablko
-from Jajo import Jajo
 
 #szerokość i wysokość ekranu
 SZEROKOSC_EKRANU = 800
@@ -40,8 +39,6 @@ jablko = Jablko()
 jablka = pygame.sprite.Group()
 jablka.add(jablko)
 
-#jajka
-jaja = pygame.sprite.Group()
 
 gra_dziala = True
 while gra_dziala:
@@ -71,16 +68,6 @@ while gra_dziala:
         jablko = Jablko()
         jablka.add(jablko)
         Punkty += 1
-
-        #dodanie jajka
-        if (Punkty % 5) == 0:
-            jajo = Jajo(waz.segmenty[-1].ostatnia_pozycja)
-            jaja.add(jajo)
-
-    #kolizja z jajami
-    kolizja_z_jajem = pygame.sprite.spritecollideany(waz, jaja)
-    if kolizja_z_jajem != None:
-        gra_dziala = False
     
     #rysowanie tła
     ekran.blit(tlo, (0, 0))
@@ -91,10 +78,6 @@ while gra_dziala:
     #rysowanie jablek
     for jablko in jablka:
         ekran.blit(jablko.obraz, jablko.rect)
-
-    #rysowanie jaj
-    for jajo in jaja:
-        ekran.blit(jajo.obraz, jajo.rect)
 
     #wyswietlenie wyniku
     tekst_z_wynikiem = moja_czcionka.render(f'Wynik: {Punkty}', False, (0, 0, 0))
